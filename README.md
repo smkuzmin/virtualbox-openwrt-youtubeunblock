@@ -89,7 +89,7 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
 6. Разрешаем подключение к **Web**-интерфейсу **OpenWrt** на **WAN**-интерфейсе (чтобы можно было управлять **OpenWrt** не только из виртуальной машины):
    **Network** -> **Firewall** -> **Zones: wan x Input = accept**
 
-7. Подключаемся к роутеру по SSH через [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) (при запросе пароля просто жмем **ENTER**):
+7. Подключаемся к **OpenWrt** по **SSH** через [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) (при запросе пароля просто жмем **ENTER**):
    ```powershell
       putty.exe 192.168.1.1
    ```
