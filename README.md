@@ -14,18 +14,14 @@
 ```powershell
 @echo off
 path %ProgramFiles%\Oracle\VirtualBox;%ProgramFiles%\7-Zip;%PATH%
-
 cls
-
 echo.
 echo === Downloading ===
 echo.
 curl -O "https://downloads.openwrt.org/releases/24.10.3/targets/x86/64/openwrt-24.10.3-x86-64-generic-ext4-combined.img.gz"
-
 echo.
 echo === Unpacking ===
 7z x -y openwrt*.img.gz
-
 echo.
 echo === Converting ===
 echo.
@@ -33,12 +29,10 @@ del>nul 2>nul /A /F /Q "OpenWrt.vdi"
 for /R "%~dp0" %%i in ("openwrt*.img") do set OPENWRT_IMAGE=%%~nxi
 vboxmanage convertfromraw "%OPENWRT_IMAGE%" "OpenWrt.vdi" --format VDI
 del>nul 2>nul /A /F /Q "openwrt*.img"
-
 echo.
 echo === Resizing ===
 echo.
 vboxmanage modifyhd --resize 512 "OpenWrt.vdi"
-
 echo.
 echo === UUID changing ===
 echo.
