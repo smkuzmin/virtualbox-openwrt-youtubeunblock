@@ -49,7 +49,7 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
       - Процессоры: **1**
    - **Жесткий диск**
       - **\[x\]** Использовать существующий виртуальный жесткий диск -> **OpenWrt.vdi**
-
+    
     и жмем **Готово**.
 
 3. Настраиваем виртуальную машину: **VirtualBox** -> **OpenWrt** -> **Настроить**:
@@ -74,6 +74,7 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
       - Имя: **Выберите ваш физический сетевой адаптер**
    - **USB**
       - **\[ \]** Включить контроллер USB
+
     и жмем **OK** для окончания настройки.
 
 4. Запускаем созданную виртуальную машину: **VirtualBox** -> **OpenWrt** -> **Запустить**.
@@ -83,6 +84,7 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
       - **Адаптер 1** (LAN)
       - Тип подключения: **Внутренняя сеть**
       - Имя: **intnet**
+
     и запускаем ее: **VirtualBox** -> **Windows** -> **Запустить**.
 
 6. Из виртуальной машины **Windows** подключаемся к **OpenWrt**: http://192.168.1.1/ (**root** / **без пароля**) и разрешаем подключения на **WAN**-интерфейсе:
@@ -114,7 +116,7 @@ strCommand = "vboxmanage startvm --type headless OpenWrt"
 objShell.Run strCommand, 0, False
 objShell.Popup "OpenWrt is starting...", 1, "Start", 64
 ```
-   - **WrtOFF.bat**
+   - **WrtOFF.vbs**
 ```vbscript
 Option Explicit
 Dim objShell, objEnv, strPath, strCommand
