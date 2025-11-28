@@ -97,8 +97,8 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
    - [luci-app-youtubeUnblock-1.1.0-1-473af29.ipk](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/luci-app-youtubeUnblock-1.1.0-1-473af29.ipk)
 
 9. Затем устанавливаем их через Web-интерфейс **OpenWrt**:
-   - **System** -> **Software** -> **Upload package** -> выбираем **youtubeUnblock** -> **Upload** -> **Install** -> **Dismiss**.
-   - **System** -> **Software** -> **Upload package** -> выбираем **luci-app-youtubeUnblock** -> **Upload** -> **Install** -> **Dismiss**.
+   - **System** -> **Software** -> **Upload package** -> выбираем **youtubeUnblock..** -> **Upload** -> **Install** -> **Dismiss**.
+   - **System** -> **Software** -> **Upload package** -> выбираем **luci-app-youtubeUnblock..** -> **Upload** -> **Install** -> **Dismiss**.
 
 10. Для быстрого старта/остановки виртуальной машины можно создать скрипты и поместить их на рабочий стол:
    - **WrtON.vbs**
