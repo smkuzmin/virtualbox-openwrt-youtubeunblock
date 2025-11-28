@@ -38,7 +38,7 @@ echo.
 vboxmanage internalcommands sethduuid "OpenWrt.vdi"
 ```
 
-2. Создаем виртуальную машину: Выберите **Машина** -> **Создать**:
+2. Создаем виртуальную машину: **VirtualBox** -> **Машина** -> **Создать**:
    - **Имя и тип ОС**
       - Имя: **OpenWrt**
       - Тип: **Linux**
@@ -50,7 +50,7 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
    - **Жесткий диск**
       **\[x\]** Использовать существующий виртуальный жесткий диск -> **OpenWrt.vdi** -> **Готово**
 
-3. Настраиваем виртуальную машину: **OpenWrt** -> **Настроить**:
+3. Настраиваем виртуальную машину: **VirtualBox** -> **OpenWrt** -> **Настроить**:
    - **Общие**
       - **Порядок загрузки**
          - **\[ \]** Гибкий диск
@@ -73,37 +73,35 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
       - **\[ \]** Включить контроллер USB
     и жмем **OK** для окончания настройки.
 
-4. Запускаем созданную виртуальную машину **OpenWrt** -> **Запустить**.
+4. Запускаем созданную виртуальную машину: **VirtualBox** -> **OpenWrt** -> **Запустить**.
 
 5. Еще создаем или используем существующую виртуальную машину **Windows**, у которой в настройках указываем:
     - **Сеть**
       - **Адаптер 1** (LAN)
       - Тип подключения: **Внутренняя сеть**
       - Имя: **intnet**
-    и запускаем ее.
+    и запускаем ее: **VirtualBox** -> **Windows** -> **Запустить**.
 
-6. Из виртуальной машины **Windows** подключаемся по **Web** к **OpenWrt** для ее дальнейшей настройки:
+6. Из виртуальной машины **Windows** подключаемся по **Web** к **OpenWrt**:
    - Веб-интерфейс: http://192.168.1.1/
    - Учетные данные: **root** / **без пароля**
-
-7. Разрешаем подключения на **WAN**-интерфейсе:
-   - **Network** -> **Firewall** -> **Zones: wan x Input = accept**
+    и разрешаем подключения на **WAN**-интерфейсе: **Network** -> **Firewall** -> **Zones: wan x Input = accept**
     Теперь управлять **OpenWrt** можно не только из виртуальной машины, но и снаружи - по IP, полученному от вашего физического роутера.
 
-8. Заходим в терминал виртуальной машины **OpenWrt** (просто жмем **ENTER**) и устанавливаем зависимости для **youtubeUnblock**:
+7. Заходим в терминал виртуальной машины **OpenWrt** (просто жмем **ENTER**) и устанавливаем зависимости для **youtubeUnblock**:
    ```bash
       opkg update && opkg install kmod-nfnetlink-queue kmod-nft-queue kmod-nf-conntrack
    ```
 
-9. На ПК скачиваем пакеты **youtubeUnblock**:
+8. На ПК скачиваем пакеты **youtubeUnblock**:
    - [youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk)
    - [luci-app-youtubeUnblock-1.1.0-1-473af29.ipk](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/luci-app-youtubeUnblock-1.1.0-1-473af29.ipk)
 
-10. Затем устанавливаем их через Web-интерфейс **OpenWrt**:
+9. Затем устанавливаем их через Web-интерфейс **OpenWrt**:
    - **System** -> **Software**, жмем **Upload package** -> выбираем **youtubeUnblock** -> жмем **Upload** -> **Install** -> **Dismiss**.
    - **System** -> **Software**, жмем **Upload package** -> выбираем **luci-app-youtubeUnblock** -> жмем **Upload** -> **Install** -> **Dismiss**.
 
-11. Для быстрого старта/остановки виртуальной машины можно создать скрипты и поместить их на рабочий стол:
+10. Для быстрого старта/остановки виртуальной машины можно создать скрипты и поместить их на рабочий стол:
    - **WrtON.vbs**
 ```vbscript
 Option Explicit
