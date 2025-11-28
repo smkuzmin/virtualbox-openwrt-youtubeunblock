@@ -74,29 +74,32 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
       - **\[ \]** Включить контроллер USB
     и жмем **OK** для окончания настройки.
 
-4. Запускаем еще виртуальную машину **Windows**, у которой в настройках выбрана **Внутренняя сеть (intnet)**.
+4. Запускаем созданную виртуальную машину **OpenWrt** -> **Запустить**.
 
-5. Подключаемся к **OpenWrt** для ее дальнейшей настройки из виртуальной машины **Windows** по **Web**:
+5. Еще создаем виртуальную машину **Windows**, у которой в настройках указываем:
+    - **Сеть**
+      - **Адаптер 1** (LAN)
+      - Тип подключения: **Внутренняя сеть**
+      - Имя: **intnet**
+    и запускаем ее.
+
+6. Из виртуальной машины **Windows** подключаемся по **Web** к **OpenWrt** для ее дальнейшей настройки:
    - Веб-интерфейс: http://192.168.1.1/
    - Учетные данные: **root** / **без пароля**
 
-6. Разрешаем подключение к **Web**-интерфейсу **OpenWrt** на **WAN**-интерфейсе (чтобы можно было управлять **OpenWrt** не только из виртуальной машины):
+7. Разрешаем подключения на **WAN**-интерфейсе (чтобы можно было управлять **OpenWrt** не только из виртуальной машины, но и снаружи):
    **Network** -> **Firewall** -> **Zones: wan x Input = accept**
 
-7. Подключаемся к **OpenWrt** по **SSH** через [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) (при запросе пароля просто жмем **ENTER**):
-   ```powershell
-      putty.exe 192.168.1.1
-   ```
-8. Устанавливаем зависимости для **youtubeUnblock** - в окне **PuTTY** выполняем команду:
+8. Заходим в терминал виртуальной машины **OpenWrt** (просто жмем **ENTER**) и устанавливаем зависимости для **youtubeUnblock**:
    ```bash
       opkg update && opkg install kmod-nfnetlink-queue kmod-nft-queue kmod-nf-conntrack
    ```
 
-9. Скачиваем пакеты **youtubeUnblock**
+9. На ПК скачиваем пакеты **youtubeUnblock**
    - [youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk)
    - [luci-app-youtubeUnblock-1.1.0-1-473af29.ipk](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/luci-app-youtubeUnblock-1.1.0-1-473af29.ipk)
 
-10. Устанавливаем их через Web-интерфейс:
+10. Устанавливаем их через Web-интерфейс **OpenWrt**:
    - **System** -> **Software**, жмем **Upload package** -> выбираем **youtubeUnblock** -> жмем **Upload** -> **Install** -> **Dismiss**.
    - **System** -> **Software**, жмем **Upload package** -> выбираем **luci-app-youtubeUnblock** -> жмем **Upload** -> **Install** -> **Dismiss**.
 
