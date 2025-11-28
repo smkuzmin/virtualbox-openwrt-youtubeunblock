@@ -1,4 +1,3 @@
-
 Создаем в [VirualBox](https://www.virtualbox.org/) виртуальную машину [OpenWrt 24.10.3](https://downloads.openwrt.org/releases/24.10.3/targets/x86/64/openwrt-24.10.3-x86-64-generic-ext4-combined.img.gz) с пакетом [youtubeUnblock 1.1.0-2](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk). Ее можно использовать, например, для тестирования обхода блокировок.
 
 ### Описание виртуальной машины
@@ -76,7 +75,7 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
 
 4. Запускаем созданную виртуальную машину **OpenWrt** -> **Запустить**.
 
-5. Еще создаем виртуальную машину **Windows**, у которой в настройках указываем:
+5. Еще создаем или используем существующую виртуальную машину **Windows**, у которой в настройках указываем:
     - **Сеть**
       - **Адаптер 1** (LAN)
       - Тип подключения: **Внутренняя сеть**
@@ -87,66 +86,47 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
    - Веб-интерфейс: http://192.168.1.1/
    - Учетные данные: **root** / **без пароля**
 
-7. Разрешаем подключения на **WAN**-интерфейсе (чтобы можно было управлять **OpenWrt** не только из виртуальной машины, но и снаружи):
-   **Network** -> **Firewall** -> **Zones: wan x Input = accept**
+7. Разрешаем подключения на **WAN**-интерфейсе:
+   - **Network** -> **Firewall** -> **Zones: wan x Input = accept**
+    Теперь управлять **OpenWrt** можно не только из виртуальной машины, но и снаружи - по IP, полученному от вашего физического роутера.
 
 8. Заходим в терминал виртуальной машины **OpenWrt** (просто жмем **ENTER**) и устанавливаем зависимости для **youtubeUnblock**:
    ```bash
       opkg update && opkg install kmod-nfnetlink-queue kmod-nft-queue kmod-nf-conntrack
    ```
 
-9. На ПК скачиваем пакеты **youtubeUnblock**
+9. На ПК скачиваем пакеты **youtubeUnblock**:
    - [youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk)
    - [luci-app-youtubeUnblock-1.1.0-1-473af29.ipk](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/luci-app-youtubeUnblock-1.1.0-1-473af29.ipk)
 
-10. Устанавливаем их через Web-интерфейс **OpenWrt**:
+10. Затем устанавливаем их через Web-интерфейс **OpenWrt**:
    - **System** -> **Software**, жмем **Upload package** -> выбираем **youtubeUnblock** -> жмем **Upload** -> **Install** -> **Dismiss**.
    - **System** -> **Software**, жмем **Upload package** -> выбираем **luci-app-youtubeUnblock** -> жмем **Upload** -> **Install** -> **Dismiss**.
 
-11. Для быстрого старта/остановки виртуальной машины можно создать скрипты:
-   - **OpenWrt-start.vbs**
+11. Для быстрого старта/остановки виртуальной машины можно создать скрипты и поместить их на рабочий стол:
+   - **WrtON.vbs**
 ```vbscript
 Option Explicit
-Dim objShell, objEnv, strPath, strCommand, intReturn
+Dim objShell, objEnv, strPath, strCommand
 Set objShell = CreateObject ("WScript.Shell")
 Set objEnv = objShell.Environment ("PROCESS")
 strPath = objEnv ("PATH")
 objEnv ("PATH") = objEnv ("ProgramFiles") & "\Oracle\VirtualBox;" & strPath
 strCommand = "vboxmanage startvm --type headless OpenWrt"
-On Error Resume Next
-intReturn = objShell.Run (strCommand, 0, False)
-If Err.Number <> 0 Then
-  WScript.Echo "Ошибка при запуске VM: " & Err.Description
-  WScript.Quit 1
-End If
-On Error GoTo 0
-WScript.Quit 0
+objShell.Run strCommand, 0, False
+objShell.Popup "OpenWrt is starting...", 1, "Start", 64
 ```
-   - **OpenWrt-stop.bat**
+   - **WrtOFF.bat**
 ```vbscript
 Option Explicit
-Dim objShell, objEnv, strPath, strCommand, intReturn
+Dim objShell, objEnv, strPath, strCommand
 Set objShell = CreateObject ("WScript.Shell")
 Set objEnv = objShell.Environment ("PROCESS")
 strPath = objEnv ("PATH")
-objEnv("PATH") = objEnv ("ProgramFiles") & "\Oracle\VirtualBox;" & strPath
-On Error Resume Next
-intReturn = objShell.Run ("vboxmanage showvminfo OpenWrt --machinereadable", 0, True)
-If Err.Number <> 0 Or intReturn <> 0 Then
-  WScript.Echo "Виртуальная машина OpenWrt не найдена или не запущена."
-  WScript.Quit 1
-End If
-On Error GoTo 0
+objEnv ("PATH") = objEnv ("ProgramFiles") & "\Oracle\VirtualBox;" & strPath
 strCommand = "vboxmanage controlvm OpenWrt poweroff"
-On Error Resume Next
-intReturn = objShell.Run (strCommand, 0, True)
-If Err.Number <> 0 Then
-  WScript.Echo "Ошибка при остановке VM: " & Err.Description
-  WScript.Quit 1
-End If
-On Error GoTo 0
-WScript.Sleep 2000
-WScript.Quit 0
+objShell.Run strCommand, 0, True
+objShell.Popup "OpenWrt stops...", 1, "Stop", 64
 ```
 
 ### Ссылки
