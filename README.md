@@ -1,5 +1,5 @@
 
-Создаем в [VirualBox](https://www.virtualbox.org/) виртуальную машину [OpenWrt 24.10.3](https://downloads.openwrt.org/releases/24.10.3/targets/x86/64/openwrt-24.10.3-x86-64-generic-ext4-combined.img.gz) с пакетом [youtubeUnblock 1.1.0-2](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk). Такую виртуальную машину можно использовать, например, для тестирования обхода блокировок.
+Создаем в [VirualBox](https://www.virtualbox.org/) виртуальную машину [OpenWrt 24.10.3](https://downloads.openwrt.org/releases/24.10.3/targets/x86/64/openwrt-24.10.3-x86-64-generic-ext4-combined.img.gz) с пакетом [youtubeUnblock 1.1.0-2](https://github.com/Waujito/youtubeUnblock/releases/download/v1.1.0/youtubeUnblock-1.1.0-2-2d579d5-x86_64-openwrt-23.05.ipk). Ее можно использовать, например, для тестирования обхода блокировок.
 
 ### Описание виртуальной машины
 
