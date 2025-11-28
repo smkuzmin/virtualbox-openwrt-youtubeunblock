@@ -87,12 +87,18 @@ vboxmanage internalcommands sethduuid "OpenWrt.vdi"
 
     и запускаем ее: **VirtualBox** -> **Windows** -> **Запустить**.
 
-6. Из виртуальной машины **Windows** подключаемся к **OpenWrt**: http://192.168.1.1/ (**root** / **без пароля**) и разрешаем подключения на **WAN**-интерфейсе:
-   - **Network** -> **Firewall** -> **Zones: wan x Input = accept**
+6. Разрешаем подключения на **WAN**-интерфейсе:
+   - **Способ 1**: Заходим в терминал виртуальной машины **OpenWrt** (просто жмем **ENTER**) и выполняем команды:
+      ```bash
+      uci set firewall.@zone[1].input='ACCEPT'
+      uci commit firewall
+      /etc/init.d/firewall restart
+      ```
+   - **Способ 2**: Из виртуальной машины **Windows** подключаемся к **OpenWrt**: http://192.168.1.1/ (**root** / **без пароля**), жмем **Network** -> **Firewall** -> **Zones** -> на пересечении **wan** и **Input** выбираем **accept** и жмем **Save & Apply**.
 
 7. Заходим в терминал виртуальной машины **OpenWrt** (просто жмем **ENTER**) и устанавливаем зависимости для **youtubeUnblock**:
    ```bash
-      opkg update && opkg install kmod-nfnetlink-queue kmod-nft-queue kmod-nf-conntrack
+   opkg update && opkg install kmod-nfnetlink-queue kmod-nft-queue kmod-nf-conntrack
    ```
 
 8. На ПК скачиваем пакеты **youtubeUnblock**:
