@@ -137,6 +137,8 @@ objShell.Run strCommand, 0, True
 objShell.Popup "OpenWrt stops...", 1, "Stop", 64
 ```
 
-### Ссылки
+***
+
+## Ссылки
 
 - [OpenWRT как виртуальный роутер: настройка DHCP и интернет-доступа](https://www.youtube.com/watch?v=xbyBIu8Gy8w)
